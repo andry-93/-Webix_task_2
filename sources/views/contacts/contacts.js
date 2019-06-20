@@ -1,12 +1,16 @@
 import {JetView} from "webix-jet";
-import {contacts} from "../../models/contacts";
 
 export default class Contacts extends JetView {
+	constructor(app, name, data) {
+		super(app, name);
+		this._contactsData = data;
+	}
+
 	config() {
 		return {
 			view: "list",
-			autoHeight: true,
 			select: true,
+			scroll: "auto",
 			template: "#Name#.<span class='webix_icon webix_icon wxi-close remove-icon' title='Remove'></span><br>#Email#",
 			type: {
 				height: 62
@@ -15,6 +19,6 @@ export default class Contacts extends JetView {
 	}
 
 	init(view) {
-		view.parse(contacts);
+		view.parse(this._contactsData);
 	}
 }

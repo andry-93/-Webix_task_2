@@ -16,7 +16,8 @@ export default class TopView extends JetView {
 			template: "#value# ",
 			data: [
 				{value: "Contacts", id: "start"},
-				{value: "Settings", id: "data"}
+				{value: "Data", id: "data"},
+				{value: "Settings", id: "settings"}
 			]
 		};
 
