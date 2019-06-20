@@ -12,8 +12,16 @@ export default class DataView extends JetView {
 		let menu = {
 			view: "list",
 			localId: "dataMenu",
+			scroll: "auto",
 			select: true,
 			data: ["Countries", "Statuses"]
+		};
+
+		let cells = {
+			cells: [
+				{id: "Countries", $subview: new DataEdit(this.app, "", countries)},
+				{id: "Statuses", $subview: new DataEdit(this.app, "", statuses)}
+			]
 		};
 
 		let ui = {
@@ -24,14 +32,10 @@ export default class DataView extends JetView {
 				header,
 				{cols: [
 					{
+						width: 200,
 						rows: [menu]
 					},
-					{
-						cells: [
-							{$subview: new DataEdit(this.app, "", countries), localId: "Countries"},
-							{$subview: new DataEdit(this.app, "", statuses), localId: "Statuses"}
-						]
-					}
+					cells
 				]}
 			]
 		};
@@ -41,7 +45,8 @@ export default class DataView extends JetView {
 
 	init() {
 		this.$$("dataMenu").attachEvent("onAfterSelect", (id) => {
-			this.$$(id);
+			// eslint-disable-next-line no-undef
+			$$(id).show();
 		});
 		this.$$("dataMenu").select("Countries");
 	}
