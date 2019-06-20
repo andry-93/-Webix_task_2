@@ -56,3 +56,13 @@
 	font-size:20px;
 	vertical-align:middle;
 }
+
+.remove-icon{
+    color: #ccc;
+    float: right;
+    margin-top: 20px;
+}
+
+.remove-icon:hover{
+    color: #888;
+}

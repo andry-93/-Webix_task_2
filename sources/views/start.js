@@ -1,3 +1,13 @@
-export default {
-	template: "Start page", css: "webix_shadow_medium app_start"
-};
+import {JetView} from "webix-jet";
+import Contacts from "./contacts/contacts";
+
+export default class Start extends JetView {
+	config() {
+		return {
+			cols: [
+				{$subview: Contacts},
+				{template: "Form"}
+			]
+		};
+	}
+}
