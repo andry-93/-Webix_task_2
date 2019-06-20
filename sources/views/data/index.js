@@ -1,4 +1,7 @@
-import {JetView, plugins} from "webix-jet";
+import {JetView} from "webix-jet";
+import DataEdit from "./DataEdit";
+import {countries} from "../../models/countries";
+import {statuses} from "../../models/statuses";
 
 export default class DataView extends JetView {
 	config() {
@@ -7,16 +10,10 @@ export default class DataView extends JetView {
 		};
 
 		let menu = {
-			view: "menu",
-			localId: "menu",
-			css: "data_menu",
-			layout: "y",
+			view: "list",
+			localId: "dataMenu",
 			select: true,
-			template: "#value# ",
-			data: [
-				{value: "Countries", id: "countries"},
-				{value: "Statuses", id: "statuses"}
-			]
+			data: ["Countries", "Statuses"]
 		};
 
 		let ui = {
@@ -27,16 +24,12 @@ export default class DataView extends JetView {
 				header,
 				{cols: [
 					{
-						width: 200,
-						padding: {right: 5},
-						paddingY: 10,
-						rows: [{css: "webix_shadow_medium", rows: [menu]}]
+						rows: [menu]
 					},
 					{
-						paddingY: 10,
-						padding: {left: 5},
-						rows: [
-							{$subview: true}
+						cells: [
+							{$subview: new DataEdit(this.app, "", countries), localId: "Countries"},
+							{$subview: new DataEdit(this.app, "", statuses), localId: "Statuses"}
 						]
 					}
 				]}
@@ -47,12 +40,9 @@ export default class DataView extends JetView {
 	}
 
 	init() {
-		this.use(plugins.Menu, {
-			id: "menu",
-			urls: {
-				countries: "data.countries",
-				statuses: "data.statuses"
-			}
+		this.$$("dataMenu").attachEvent("onAfterSelect", (id) => {
+			this.$$(id);
 		});
+		this.$$("dataMenu").select("Countries");
 	}
 }
