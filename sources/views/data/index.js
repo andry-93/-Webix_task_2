@@ -45,8 +45,7 @@ export default class DataView extends JetView {
 
 	init() {
 		this.$$("dataMenu").attachEvent("onAfterSelect", (id) => {
-			// eslint-disable-next-line no-undef
-			$$(id).show();
+			webix.$$(id).show();
 		});
 		this.$$("dataMenu").select("Countries");
 	}
