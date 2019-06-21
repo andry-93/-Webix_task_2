@@ -7,10 +7,22 @@ export default class DataEdit extends JetView {
 	}
 
 	config() {
-		return {view: "datatable", autoConfig: true, css: "webix_shadow_medium", scroll: "auto"};
+		return {
+			rows: [
+				{view: "datatable", localId: "dataTable", editable: true, editaction: "click", autoConfig: true, css: "webix_shadow_medium", scroll: "auto"},
+				{view: "button", value: "Add new", click: () => { this.addRow(); }}
+			]
+		};
 	}
 
-	init(view) {
-		view.parse(this._dta);
+	init() {
+		this.$$("dataTable").parse(this._dta);
+	}
+
+	addRow() {
+		let dataTable = this.$$("dataTable");
+		dataTable.editStop();
+		let id = dataTable.add([""], 0);
+		dataTable.editRow(id);
 	}
 }
