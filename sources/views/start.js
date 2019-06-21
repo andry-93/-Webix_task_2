@@ -36,4 +36,13 @@ export default class Start extends JetView {
 	init() {
 		this.$$("contacts").parse(contacts);
 	}
+
+	urlChange() {
+		const userList = this.$$("contacts");
+		const id = this.getParam("id");
+		if (id && userList.exists(id)) {
+			userList.select(id);
+		}
+		else userList.select(1);
+	}
 }
