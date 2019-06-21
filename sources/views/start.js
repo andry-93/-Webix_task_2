@@ -43,6 +43,6 @@ export default class Start extends JetView {
 		if (id && userList.exists(id)) {
 			userList.select(id);
 		}
-		else userList.select(1);
+		else userList.select(userList.getFirstId());
 	}
 }
