@@ -1,24 +1,35 @@
 import {JetView} from "webix-jet";
+import {contacts} from "../../models/contacts";
 
 export default class Contacts extends JetView {
-	constructor(app, name, data) {
-		super(app, name);
-		this._contactsData = data;
-	}
-
 	config() {
 		return {
-			view: "list",
-			select: true,
-			scroll: "auto",
-			template: "#Name#.<span class='webix_icon webix_icon wxi-close remove-icon' title='Remove'></span><br>#Email#",
-			type: {
-				height: 62
-			}
+			rows: [
+				{
+					view: "list",
+					select: true,
+					scroll: "auto",
+					template: "#Name#.<span class='webix_icon webix_icon wxi-close remove-icon' title='Remove'></span><br>#Email#",
+					type: {
+						height: 62
+					}
+				},
+				{view: "button", value: "Add"}
+			]
 		};
 	}
 
 	init(view) {
-		view.parse(this._contactsData);
+		let list = view.queryView("list");
+		list.parse(contacts);
+		list.attachEvent("onAfterSelect", (id) => {
+			this.setParam("id", id, true);
+			// this.app.getService("contactsData").setState(list.getSelectedItem());
+			// console.log(this.app.getService("contactsData").getState());
+		});
+	}
+
+	urlChange() {
+	//	console.log(this.getParam("id"));
 	}
 }

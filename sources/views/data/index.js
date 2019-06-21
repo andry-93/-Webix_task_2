@@ -19,8 +19,8 @@ export default class DataView extends JetView {
 
 		let cells = {
 			cells: [
-				{id: "Countries", $subview: new DataEdit(this.app, "", countries)},
-				{id: "Statuses", $subview: new DataEdit(this.app, "", statuses)}
+				{localId: "Countries", rows: [{$subview: new DataEdit(this.app, "", countries)}]},
+				{localId: "Statuses", rows: [{$subview: new DataEdit(this.app, "", statuses)}]}
 			]
 		};
 
@@ -45,7 +45,7 @@ export default class DataView extends JetView {
 
 	init() {
 		this.$$("dataMenu").attachEvent("onAfterSelect", (id) => {
-			webix.$$(id).show();
+			this.$$(id).show();
 		});
 		this.$$("dataMenu").select("Countries");
 	}
