@@ -4,11 +4,12 @@ import ContactsForm from "./contacts/form";
 
 export default class Start extends JetView {
 	config() {
+		const _ = this.app.getService("locale")._;
 		return {
 			cols: [
 				{rows: [
 					{
-						type: "header", template: "Contacts", css: "webix_header app_header"
+						type: "header", value: "Contacts", template: (obj, id) => _(id.config.value), css: "webix_header app_header"
 					},
 					{
 						view: "list",

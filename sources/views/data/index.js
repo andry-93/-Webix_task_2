@@ -5,8 +5,9 @@ import {statuses} from "../../models/statuses";
 
 export default class DataView extends JetView {
 	config() {
+		const _ = this.app.getService("locale")._;
 		let header = {
-			type: "header", template: "Data", css: "webix_header app_header"
+			type: "header", value: "Data", template: (obj, id) => _(id.config.value), css: "webix_header app_header"
 		};
 
 		let menu = {
@@ -14,6 +15,7 @@ export default class DataView extends JetView {
 			localId: "dataMenu",
 			scroll: "auto",
 			select: true,
+			template: obj => _(obj.value),
 			data: ["Countries", "Statuses"]
 		};
 

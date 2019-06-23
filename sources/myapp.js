@@ -18,7 +18,7 @@ export default class MyApp extends JetApp {
 if (!BUILD_AS_MODULE) {
 	webix.ready(() => {
 		const app = new MyApp();
-		app.use(plugins.Locale);
+		app.use(plugins.Locale, {lang: "en"});
 		app.render();
 	});
 }
