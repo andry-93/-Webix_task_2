@@ -23,9 +23,29 @@ export default class Start extends JetView {
 							onAfterSelect: (id) => {
 								this.setParam("id", id, true);
 							}
+						},
+						onClick: {
+							// eslint-disable-next-line func-names
+							"remove-icon": function (_e, id) {
+								let obj = this;
+								webix.confirm({
+									title: "Delete",
+									text: "Are you sure?"
+								}).then(() => {
+									obj.remove(id);
+									return false;
+								});
+							}
 						}
 					},
-					{view: "button", value: "Add"}
+					{
+						view: "button",
+						value: "Add",
+						click: () => {
+							const user = {Name: "New user", Email: ""};
+							contacts.add(user);
+						}
+					}
 				]},
 				{view: "resizer"},
 				new ContactsForm(this.app, "", contacts)
