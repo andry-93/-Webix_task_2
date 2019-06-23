@@ -1,13 +1,9 @@
 import {JetView} from "webix-jet";
 import {countries} from "../../models/countries";
 import {statuses} from "../../models/statuses";
+import {contacts} from "../../models/contacts";
 
 export default class ContactsForm extends JetView {
-	constructor(app, name, data) {
-		super(app, name);
-		this._contacts = data;
-	}
-
 	config() {
 		return {
 			view: "form",
@@ -48,19 +44,24 @@ export default class ContactsForm extends JetView {
 		};
 	}
 
-	init(view) {
-		this.$$("onSave").attachEvent("onItemClick", () => {
-			if (this.getParam("id") <= this._contacts.count()) {
-				let id = this.getParam("id");
-				this._contacts.updateItem(id, view.getValues());
-			}
-		});
-	}
-
 	urlChange(view) {
-		if (this.getParam("id") <= this._contacts.count()) {
+		webix.promise.all([
+			contacts.waitData,
+			countries.waitData,
+			statuses.waitData
+		]).then(() => {
 			let id = this.getParam("id");
-			view.setValues(this._contacts.getItem(id));
-		}
+			if (id && contacts.exists(id)) {
+				view.setValues(contacts.getItem(id));
+			}
+			else view.clear();
+
+			this.$$("onSave").attachEvent("onItemClick", () => {
+				let _id = this.getParam("id");
+				if (_id && contacts.exists(_id)) {
+					contacts.updateItem(_id, view.getValues());
+				}
+			});
+		});
 	}
 }

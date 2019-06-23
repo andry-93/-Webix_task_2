@@ -27,12 +27,11 @@ export default class Start extends JetView {
 						onClick: {
 							// eslint-disable-next-line func-names
 							"remove-icon": function (_e, id) {
-								let obj = this;
 								webix.confirm({
 									title: "Delete",
 									text: "Are you sure?"
 								}).then(() => {
-									obj.remove(id);
+									contacts.remove(id);
 									return false;
 								});
 							}
@@ -48,21 +47,25 @@ export default class Start extends JetView {
 					}
 				]},
 				{view: "resizer"},
-				new ContactsForm(this.app, "", contacts)
+				ContactsForm
 			]
 		};
 	}
 
 	init() {
-		this.$$("contacts").parse(contacts);
+		this.$$("contacts").sync(contacts);
 	}
 
 	urlChange() {
 		const userList = this.$$("contacts");
 		const id = this.getParam("id");
-		if (id && userList.exists(id)) {
-			userList.select(id);
-		}
-		else userList.select(userList.getFirstId());
+		contacts.waitData.then(
+			() => {
+				if (id && userList.exists(id)) {
+					userList.select(id);
+				}
+				else userList.select(userList.getFirstId());
+			}
+		);
 	}
 }
