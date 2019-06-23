@@ -16,13 +16,17 @@ export default class DataEdit extends JetView {
 	}
 
 	init() {
-		this.$$("dataTable").parse(this._dta);
+		this.$$("dataTable").sync(this._dta);
 	}
 
 	addRow() {
 		let dataTable = this.$$("dataTable");
+		let data = {id: "", Name: ""};
 		dataTable.editStop();
-		let id = dataTable.add([""], 0);
-		dataTable.editRow(id);
+		this._dta.waitSave(() => {
+			this._dta.add(data, 0);
+		}).then((res) => {
+			dataTable.editRow(res.id);
+		});
 	}
 }

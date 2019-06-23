@@ -44,9 +44,10 @@ export default class DataView extends JetView {
 	}
 
 	init() {
-		this.$$("dataMenu").attachEvent("onAfterSelect", (id) => {
+		let dataMenu = this.$$("dataMenu");
+		dataMenu.attachEvent("onAfterSelect", (id) => {
 			this.$$(id).show();
 		});
-		this.$$("dataMenu").select("Countries");
+		dataMenu.select(dataMenu.getFirstId());
 	}
 }
