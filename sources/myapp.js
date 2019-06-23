@@ -1,4 +1,4 @@
-import {JetApp, EmptyRouter, HashRouter, plugins} from "webix-jet";
+import {JetApp, EmptyRouter, HashRouter} from "webix-jet";
 import "./styles/app.css";
 
 export default class MyApp extends JetApp {
