@@ -16,8 +16,7 @@ export default class Settings extends JetView {
 		return {
 			rows: [{
 				type: "header",
-				value: "Settings",
-				template: (obj, id) => _(id.config.value),
+				template: _("Settings"),
 				css: "webix_header app_header"
 			},
 			{
@@ -26,8 +25,8 @@ export default class Settings extends JetView {
 					value: lang,
 					localId: "segmented",
 					options: [
-						{id: "en", value: "English"},
-						{id: "ru", value: "Russian"}
+						{id: "en", value: _("English")},
+						{id: "ru", value: _("Russian")}
 					],
 					click: () => {
 						this.toggleLanguage();

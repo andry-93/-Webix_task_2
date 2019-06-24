@@ -9,7 +9,7 @@ export default class Start extends JetView {
 			cols: [
 				{rows: [
 					{
-						type: "header", value: "Contacts", template: (obj, id) => _(id.config.value), css: "webix_header app_header"
+						type: "header", template: _("Contacts"), css: "webix_header app_header"
 					},
 					{
 						view: "list",
@@ -40,7 +40,7 @@ export default class Start extends JetView {
 					},
 					{
 						view: "button",
-						value: "Add",
+						value: _("Add"),
 						click: () => {
 							const user = {Name: "New user", Email: ""};
 							contacts.add(user);

@@ -2,10 +2,14 @@ export default {
 	Contacts: "Contacts",
 	Data: "Data",
 	Settings: "Settings",
-	en: "English",
-	ru: "Russian",
+	English: "English",
+	Russian: "Russian",
 	Add: "Add",
-	"Add new": "Добавить новую",
 	Countries: "Countries",
-	Statuses: "Statuses"
+	Statuses: "Statuses",
+	"User Name": "User Name",
+	Email: "Email",
+	Country: "Country",
+	Status: "Status",
+	Save: "Save"
 };

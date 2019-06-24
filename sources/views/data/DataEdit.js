@@ -7,10 +7,11 @@ export default class DataEdit extends JetView {
 	}
 
 	config() {
+		const _ = this.app.getService("locale")._;
 		return {
 			rows: [
 				{view: "datatable", localId: "dataTable", editable: true, editaction: "click", autoConfig: true, css: "webix_shadow_medium", scroll: "auto"},
-				{view: "button", value: "Add new", click: () => { this.addRow(); }}
+				{view: "button", value: _("Add"), click: () => { this.addRow(); }}
 			]
 		};
 	}

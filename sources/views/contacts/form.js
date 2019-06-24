@@ -5,16 +5,17 @@ import {contacts} from "../../models/contacts";
 
 export default class ContactsForm extends JetView {
 	config() {
+		const _ = this.app.getService("locale")._;
 		return {
 			view: "form",
 			elements: [
-				{view: "text", label: "User Name", labelPosition: "top", name: "Name"},
-				{view: "text", label: "Email", labelPosition: "top", name: "Email"},
+				{view: "text", label: _("User Name"), labelPosition: "top", name: "Name"},
+				{view: "text", label: _("Email"), labelPosition: "top", name: "Email"},
 				{
 					view: "richselect",
 					labelPosition: "top",
 					name: "Country",
-					label: "Country",
+					label: _("Country"),
 					options: {
 						body: {
 							template: "#Name#",
@@ -26,7 +27,7 @@ export default class ContactsForm extends JetView {
 					view: "richselect",
 					labelPosition: "top",
 					name: "Status",
-					label: "Status",
+					label: _("Status"),
 					options: {
 						body: {
 							template: "#Name#",
@@ -37,7 +38,7 @@ export default class ContactsForm extends JetView {
 				{
 					view: "button",
 					localId: "onSave",
-					value: "Save"
+					value: _("Save")
 				},
 				{}
 			]
